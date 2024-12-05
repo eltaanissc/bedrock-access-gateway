@@ -3,6 +3,7 @@ import json
 import logging
 import re
 import time
+import os
 from abc import ABC
 from typing import AsyncIterable, Iterable, Literal
 
@@ -57,10 +58,20 @@ SUPPORTED_BEDROCK_EMBEDDING_MODELS = {
 
 ENCODER = tiktoken.get_encoding("cl100k_base")
 
-# Add your AWS credentials here  
-AWS_ACCESS_KEY_ID = 'blabal'  
-AWS_SECRET_ACCESS_KEY = 'blabla'  
-AWS_REGION ='cblabla'
+# Read AWS credentials from environment variables  
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')  
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')  
+  
+# Check if credentials are not None  
+if not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY:  
+    raise EnvironmentError("AWS credentials not found in environment variables")  
+  
+bedrock_runtime = boto3.client(  
+    service_name="bedrock-runtime",  
+    region_name=AWS_REGION,  
+    aws_access_key_id=AWS_ACCESS_KEY_ID,  
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY  
+)  
   
 bedrock_runtime = boto3.client(  
     service_name="bedrock-runtime",  
