@@ -10,6 +10,8 @@ from mangum import Mangum
 from api.routers import model, chat, embeddings
 from api.setting import API_ROUTE_PREFIX, TITLE, DESCRIPTION, SUMMARY, VERSION
 
+
+
 config = {
     "title": TITLE,
     "description": DESCRIPTION,

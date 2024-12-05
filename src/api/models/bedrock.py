@@ -57,6 +57,18 @@ SUPPORTED_BEDROCK_EMBEDDING_MODELS = {
 
 ENCODER = tiktoken.get_encoding("cl100k_base")
 
+# Add your AWS credentials here  
+AWS_ACCESS_KEY_ID = 'blabal'  
+AWS_SECRET_ACCESS_KEY = 'blabla'  
+AWS_REGION ='cblabla'
+  
+bedrock_runtime = boto3.client(  
+    service_name="bedrock-runtime",  
+    region_name=AWS_REGION,  
+    aws_access_key_id=AWS_ACCESS_KEY_ID,  
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY  
+) 
+
 
 class BedrockModel(BaseChatModel):
     # https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features
